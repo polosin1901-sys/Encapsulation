@@ -44,7 +44,7 @@ public class App {
             basket.clearBasket();
 
 //      Печать содержимого пустой корзины
-            basket.printIfBasketIsEmpty();
+            basket.printBasket();
 
 //      Получение стоимости пустой корзины
             System.out.println("Получение стоимости пустой корзины: " + basket.sumUpThePrice());

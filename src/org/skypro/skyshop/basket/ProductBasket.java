@@ -4,18 +4,18 @@ import org.skypro.skyshop.product.Product;
 
 public class ProductBasket {
 
-    public final Product basket[] = new Product[5];
+    private final Product basket[] = new Product[5];
 
     public void addProduct(Product product) {
-        boolean added = true;
+        boolean added = false;
         for (int i = 0; i < basket.length; i++) {
             if (basket[i] == null) {
                 basket[i] = product;
-                added = false;
+                added = true;
                 break;
             }
         }
-        if (added) {
+        if (!added) {
             System.out.println("Невозможно добавить продукт");
         }
     }
@@ -31,14 +31,19 @@ public class ProductBasket {
     }
 
     public void printBasket() {
+        boolean isEmpty = true;
         for (Product p : basket) {
-            if (p == null) {
-                System.out.println("В корзине ничего нет");
-            } else {
+            if (p != null) {
+                isEmpty = false;
                 System.out.println(p.getName() + " : " + p.getPrice());
+
             }
         }
-        System.out.println("Итого: " + sumUpThePrice());
+        if (isEmpty) {
+            System.out.println("В корзине ничего нет");
+        } else {
+            System.out.println("Итого: " + sumUpThePrice());
+        }
     }
 
     public boolean checkProductName(String name) {
@@ -55,20 +60,6 @@ public class ProductBasket {
             if (basket[i] != null) {
                 basket[i] = null;
             }
-        }
-    }
-
-    //    Метод для проверки пустоты корзины
-    public void printIfBasketIsEmpty() {
-        boolean isEmpty = true;
-        for (int i = 0; i < basket.length; i++) {
-            if (basket[i] != null) {
-                isEmpty = false;
-                break;
-            }
-        }
-        if (isEmpty) {
-            System.out.println("Корзина пуста");
         }
     }
 }
