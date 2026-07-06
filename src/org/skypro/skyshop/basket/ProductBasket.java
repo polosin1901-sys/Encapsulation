@@ -32,22 +32,27 @@ public class ProductBasket {
 
     public void printBasket() {
         boolean isEmpty = true;
-        int counter = 0;
         for (Product p : basket) {
             if (p != null) {
                 isEmpty = false;
                 System.out.println(p);
-                if (p.isSpecial()) {
-                    counter++;
-                }
             }
         }
         if (isEmpty) {
             System.out.println("В корзине ничего нет");
         } else {
             System.out.println("Итого: " + sumUpThePrice());
-            System.out.println("Специальных товаров: " + counter);
         }
+    }
+
+    public void countingSpecialProducts() {
+        int counter = 0;
+        for (Product p : basket) {
+            if (p != null && p.isSpecial()) {
+                counter++;
+            }
+        }
+        System.out.println("Специальных товаров: " + counter);
     }
 
     public boolean checkProductName(String name) {
