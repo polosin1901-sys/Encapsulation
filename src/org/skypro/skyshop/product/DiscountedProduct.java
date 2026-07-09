@@ -5,10 +5,10 @@ public class DiscountedProduct extends Product {
     private int price;
     private int discount;
 
-    public DiscountedProduct(String name, int discount, int price) {
+    public DiscountedProduct(String name, int price, int discount) {
         super(name);
-        this.discount = discount;
         this.price = price;
+        this.discount = discount;
     }
 
     @Override

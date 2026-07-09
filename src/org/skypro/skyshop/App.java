@@ -13,7 +13,7 @@ public class App {
 
             ProductBasket basket = new ProductBasket();
             Product product1 = new SimpleProduct("Яблоко", 10);
-            Product product2 = new DiscountedProduct("Банан", 20,45);
+            Product product2 = new DiscountedProduct("Банан", 100,10);
             Product product3 = new SimpleProduct("Вишня", 30);
             Product product4 = new FixPriceProduct("Черемша");
             Product product5 = new SimpleProduct("Огурцы", 50);
@@ -32,10 +32,11 @@ public class App {
 
 //      Печать содержимого корзины с несколькими товарами
             basket.printBasket();
+            basket.countingSpecialProducts();
 
 //      Получение стоимости корзины с несколькими товарами
 
-            System.out.println("Стоимость корзины с ннесколькими товарами: " + basket.sumUpThePrice());
+            System.out.println("Стоимость корзины с несколькими товарами: " + basket.sumUpThePrice());
 //      Поиск товара, который есть в корзине
             System.out.println(basket.checkProductName("Черемша"));
 
@@ -55,7 +56,7 @@ public class App {
 //      Поиск товара по имени в пустой корзине
             System.out.println(basket.checkProductName("Яблоко"));
 
-            DiscountedProduct discountedProduct = new DiscountedProduct("Ежевика",15, 5000);
+            DiscountedProduct discountedProduct = new DiscountedProduct("Ежевика",420, 20);
             System.out.println(discountedProduct.getPrice());
 
         }
