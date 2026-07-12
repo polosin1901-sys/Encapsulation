@@ -60,7 +60,7 @@ public class App {
             System.out.println(discountedProduct.getPrice());
 
 //            Тестирование изменений (домашка к уроку - ООП: полиморфизм, интерфейсы)
-            SearchEngine searchEngine = new SearchEngine(8);
+            SearchEngine searchEngine = new SearchEngine(10);
             searchEngine.add(product1);
             searchEngine.add(product2);
             searchEngine.add(product3);
