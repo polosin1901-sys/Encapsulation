@@ -16,12 +16,15 @@ public class SearchEngine {
         int resultCount = 0;
         Searchable[] resultArray = new Searchable[5];
         for (int i = 0; i < searchArray.length; i++) {
-            if (searchArray[i].searchTerm().contains(string) && resultCount < resultArray.length) {
+            if (searchArray[i] != null && searchArray[i].searchTerm().contains(string)) {
+                if (resultCount >= resultArray.length) {
+                    break;
+                }
                 resultArray[resultCount] = searchArray[i];
                 resultCount++;
             }
         }
-       return resultArray;
+        return resultArray;
     }
 
     public boolean add(Searchable searchable) {
