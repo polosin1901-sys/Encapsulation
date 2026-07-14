@@ -18,6 +18,4 @@ public abstract class Product implements Searchable {
     public abstract int getPrice();
 
     public abstract boolean isSpecial();
-
-
 }
