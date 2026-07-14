@@ -5,7 +5,7 @@ public class DiscountedProduct extends Product {
     private int price;
     private int discount;
 
-    public DiscountedProduct(String name, int discount, int price) {
+    public DiscountedProduct(String name, int price, int discount) {
         super(name);
         this.discount = discount;
         this.price = price;
@@ -13,7 +13,7 @@ public class DiscountedProduct extends Product {
 
     @Override
     public int getPrice() {
-        double priceOfDiscount = price * (discount/100.0);
+        double priceOfDiscount = price * (discount / 100.0);
         return (int) (price - priceOfDiscount);
 
 

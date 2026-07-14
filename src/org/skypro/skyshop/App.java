@@ -14,7 +14,7 @@ public class App {
 
             ProductBasket basket = new ProductBasket();
             Product product1 = new SimpleProduct("Яблоко", 10);
-            Product product2 = new DiscountedProduct("Банан", 20,45);
+            Product product2 = new DiscountedProduct("Банан", 45, 15);
             Product product3 = new SimpleProduct("Вишня", 30);
             Product product4 = new FixPriceProduct("Черемша");
             Product product5 = new SimpleProduct("Огурцы", 50);
@@ -56,7 +56,7 @@ public class App {
 //      Поиск товара по имени в пустой корзине
             System.out.println(basket.checkProductName("Яблоко"));
 
-            DiscountedProduct discountedProduct = new DiscountedProduct("Ежевика",15, 5000);
+            DiscountedProduct discountedProduct = new DiscountedProduct("Ежевика", 50, 10);
             System.out.println(discountedProduct.getPrice());
 
 //            Тестирование изменений (домашка к уроку - ООП: полиморфизм, интерфейсы)
