@@ -33,10 +33,11 @@ public class App {
 
 //      Печать содержимого корзины с несколькими товарами
             basket.printBasket();
+            basket.countingSpecialProducts();
 
 //      Получение стоимости корзины с несколькими товарами
 
-            System.out.println("Стоимость корзины с ннесколькими товарами: " + basket.sumUpThePrice());
+            System.out.println("Стоимость корзины с несколькими товарами: " + basket.sumUpThePrice());
 //      Поиск товара, который есть в корзине
             System.out.println(basket.checkProductName("Черемша"));
 
