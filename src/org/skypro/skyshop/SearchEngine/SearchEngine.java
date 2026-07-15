@@ -36,4 +36,27 @@ public class SearchEngine {
         }
         return false;
     }
+
+    public Searchable findBestMatch(String search) throws BestResultNotFound {
+        int maxOccurrences = 0;
+        Searchable bestMatch = null;
+        for (Searchable srch : searchArray) {
+            String term = srch.searchTerm();
+            int count = 0;
+            int index = term.indexOf(search);
+            while (index != -1) {
+                count++;
+                index = term.indexOf(search, index + search.length());
+            }
+            if (count > maxOccurrences) {
+                maxOccurrences = count;
+                bestMatch = srch;
+            }
+        }
+        if (bestMatch == null) {
+            throw new BestResultNotFound("Не найдена строка - " + search);
+        }
+        return bestMatch;
+    }
+
 }

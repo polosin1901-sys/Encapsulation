@@ -9,6 +9,12 @@ public class DiscountedProduct extends Product {
         super(name);
         this.discount = discount;
         this.price = price;
+        if (price <= 0) {
+            throw new IllegalArgumentException("Цена должна быть больше нуля");
+        }
+        if (discount < 0 || discount > 100) {
+            throw new IllegalArgumentException("Размер скидки должен быть от 0% до 100%");
+        }
     }
 
     @Override

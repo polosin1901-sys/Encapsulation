@@ -1,6 +1,7 @@
 package org.skypro.skyshop;
 
 import org.skypro.skyshop.Interface.Searchable;
+import org.skypro.skyshop.SearchEngine.BestResultNotFound;
 import org.skypro.skyshop.SearchEngine.SearchEngine;
 import org.skypro.skyshop.basket.ProductBasket;
 import org.skypro.skyshop.product.*;
@@ -10,7 +11,7 @@ import java.util.Arrays;
 public class App {
 
     public static class Main {
-        public static void main(String[] args) {
+        public static void main(String[] args) throws BestResultNotFound {
 
             ProductBasket basket = new ProductBasket();
             Product product1 = new SimpleProduct("Яблоко", 10);
@@ -85,6 +86,23 @@ public class App {
             System.out.println("- - - - - - - - - - - - - - - - - ");
             Searchable[] searchables3 = searchEngine.search("емша");
             System.out.println(Arrays.toString(searchables3));
+            System.out.println("- - - - - - - - - - - - - - - - - ");
+
+//      Выполнение домашки по теме: Исключения в Java
+            try {
+                Product product10 = new SimpleProduct("Яблоко", 1);
+                Product product11 = new DiscountedProduct("Банан", 60, 101);
+            } catch (IllegalArgumentException e) {
+                System.out.println("Возникла ошибка заполнения параметров продуктов - " + e.getMessage());
+            }
+            System.out.println("- - - - - - - - - - - - - - - - - ");
+//      Демонстрация нового метода поиска
+            System.out.println(searchEngine.findBestMatch("Яблоко"));
+            try {
+                System.out.println(searchEngine.findBestMatch("Сельдерей"));
+            } catch (BestResultNotFound e) {
+                System.out.println(e.getMessage());
+            }
 
         }
     }
