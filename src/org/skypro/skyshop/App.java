@@ -7,6 +7,8 @@ import org.skypro.skyshop.basket.ProductBasket;
 import org.skypro.skyshop.product.*;
 
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 public class App {
 
@@ -61,7 +63,7 @@ public class App {
             System.out.println(discountedProduct.getPrice());
 
 //            Тестирование изменений (домашка к уроку - ООП: полиморфизм, интерфейсы)
-            SearchEngine searchEngine = new SearchEngine(10);
+            SearchEngine searchEngine = new SearchEngine(new LinkedList<>());
             searchEngine.add(product1);
             searchEngine.add(product2);
             searchEngine.add(product3);
@@ -69,23 +71,29 @@ public class App {
             searchEngine.add(product5);
             searchEngine.add(product6);
 
-            Searchable article1 = new Article("Яблоко","Вкусные краснодарские яблоки");
-            Searchable article2 = new Article("Банан","Зелёные эквадорские бананы");
-            Searchable article3 = new Article("Картофель","Молодой белорусский картофель");
-            Searchable article4 = new Article("Черемша","Многолетнее травянистое растение рода Лук, самый ранний весенний источник зелени");
+            Searchable article1 = new Article("Яблоко", "Вкусные краснодарские яблоки");
+            Searchable article2 = new Article("Банан", "Зелёные эквадорские бананы");
+            Searchable article3 = new Article("Картофель", "Молодой белорусский картофель");
+            Searchable article4 = new Article("Черемша", "Многолетнее травянистое растение рода Лук, самый ранний весенний источник зелени");
             searchEngine.add(article1);
             searchEngine.add(article2);
             searchEngine.add(article3);
             searchEngine.add(article4);
 
-            Searchable[] searchables = searchEngine.search("Яблоко");
-            System.out.println(Arrays.toString(searchables));
+            List<Searchable> searchables = searchEngine.search("Яблоко");
+            for (Searchable searchable : searchables) {
+                System.out.println(searchable);
+            }
             System.out.println("- - - - - - - - - - - - - - - - - ");
-            Searchable[] searchables2 = searchEngine.search("Бан");
-            System.out.println(Arrays.toString(searchables2));
+            List<Searchable> searchables2 = searchEngine.search("Бан");
+            for (Searchable searchable2 : searchables2) {
+                System.out.println(searchable2);
+            }
             System.out.println("- - - - - - - - - - - - - - - - - ");
-            Searchable[] searchables3 = searchEngine.search("емша");
-            System.out.println(Arrays.toString(searchables3));
+            List<Searchable> searchables3 = searchEngine.search("емша");
+            for (Searchable searchable3 : searchables3) {
+                System.out.println(searchable3);
+            }
             System.out.println("- - - - - - - - - - - - - - - - - ");
 
 //      Выполнение домашки по теме: Исключения в Java
@@ -103,7 +111,48 @@ public class App {
             } catch (BestResultNotFound e) {
                 System.out.println(e.getMessage());
             }
+            System.out.println("1 - - - - - - - - - - - - - - - - ");
+//      Выполнение домашки по теме: Java Collections Framework: List
+            Product product11 = new SimpleProduct("Яблоко", 10);
+            Product product21 = new DiscountedProduct("Банан", 45, 15);
+            Product product31 = new SimpleProduct("Вишня", 30);
+            Product product41 = new FixPriceProduct("Черемша");
+            Product product51 = new SimpleProduct("Огурцы", 50);
+            Product product61 = new SimpleProduct("Картофель", 60);
+            basket.addProduct(product11);
+            basket.addProduct(product21);
+            basket.addProduct(product31);
+            basket.addProduct(product41);
+            basket.addProduct(product51);
+            basket.addProduct(product61);
+//            Удаление существующего продукта из корзины
+            basket.deleteProductByName("Яблоко");
+//            Выведение удаленных продуктов на экран
+            LinkedList<Product> deletedProductsBasket = basket.deleteProductByName("Банан");
+            System.out.println("Удалённые из корзины продукты:");
+            for (Product p : deletedProductsBasket) {
+                System.out.println(p);
+            }
+            System.out.println("- - - - - - - - - - - - - - - - - ");
+//            Выведение содержимого корзины с помощью метода printBasket
+            basket.printBasket();
+            System.out.println("- - - - - - - - - - - - - - - - - ");
+//            Удаление несуществующего продукта
 
+//            Проверка списка удаленных продуктов
+            LinkedList<Product> deletedProductsBasket1 = basket.deleteProductByName("Арбуз");
+            System.out.println("Удалённые из корзины продукты:");
+            if (deletedProductsBasket1.isEmpty()) {
+                System.out.println("Список пуст");
+            } else {
+                for (Product p : deletedProductsBasket1) {
+                    System.out.println(p);
+                }
+            }
+
+            System.out.println("- - - - - - - - - - - - - - - - - ");
+//            Вывод содержимого корзины на экран
+            basket.printBasket();
         }
     }
 }
