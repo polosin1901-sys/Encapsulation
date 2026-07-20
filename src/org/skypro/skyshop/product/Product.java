@@ -2,7 +2,9 @@ package org.skypro.skyshop.product;
 
 import org.skypro.skyshop.Interface.Searchable;
 
-public abstract class Product implements Searchable {
+import java.util.LinkedList;
+
+public abstract class Product extends LinkedList<Product> implements Searchable {
 
     private final String name;
 

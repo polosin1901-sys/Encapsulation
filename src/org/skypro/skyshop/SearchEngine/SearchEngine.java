@@ -1,38 +1,38 @@
 package org.skypro.skyshop.SearchEngine;
 
-import org.skypro.skyshop.product.Product;
-
 import org.skypro.skyshop.Interface.Searchable;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class SearchEngine {
 
-    List<Searchable> searchArray;
+    TreeMap<String, Searchable> searchArray;
 
-    public SearchEngine(List<Searchable> searchArray) {
+    public SearchEngine(TreeMap<String, Searchable> searchArray) {
         this.searchArray = searchArray;
     }
 
-    public LinkedList search(String string) {
-        LinkedList<Searchable> resultList = new LinkedList<>();
-        for (Searchable searchable : searchArray) {
-            if (searchable != null && searchable.searchTerm().contains(string)) {
-                resultList.add(searchable);
+    public TreeMap search(String string) {
+        TreeMap<String,Searchable> resultMap = new TreeMap<>();
+        for (Map.Entry<String, Searchable> m : searchArray.entrySet()) {
+            if (m.getValue().searchTerm().contains(string)) {
+                resultMap.put(m.getKey(), m.getValue());
             }
         }
-        return resultList;
+        return resultMap;
     }
 
-    public void add(Searchable searchable) {
-        searchArray.add(searchable);
+    public void add(Searchable product) {
+        searchArray.put(product.getName(), product);
     }
+
+
 
     public Searchable findBestMatch(String search) throws BestResultNotFound {
         int maxOccurrences = 0;
         Searchable bestMatch = null;
-        for (Searchable srch : searchArray) {
+        for (Searchable srch : searchArray.values()) {
             String term = srch.searchTerm();
             int count = 0;
             int index = term.indexOf(search);

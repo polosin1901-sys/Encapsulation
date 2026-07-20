@@ -6,9 +6,8 @@ import org.skypro.skyshop.SearchEngine.SearchEngine;
 import org.skypro.skyshop.basket.ProductBasket;
 import org.skypro.skyshop.product.*;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.sql.SQLOutput;
+import java.util.*;
 
 public class App {
 
@@ -63,7 +62,7 @@ public class App {
             System.out.println(discountedProduct.getPrice());
 
 //            Тестирование изменений (домашка к уроку - ООП: полиморфизм, интерфейсы)
-            SearchEngine searchEngine = new SearchEngine(new LinkedList<>());
+            SearchEngine searchEngine = new SearchEngine(new TreeMap<>());
             searchEngine.add(product1);
             searchEngine.add(product2);
             searchEngine.add(product3);
@@ -80,19 +79,20 @@ public class App {
             searchEngine.add(article3);
             searchEngine.add(article4);
 
-            List<Searchable> searchables = searchEngine.search("Яблоко");
-            for (Searchable searchable : searchables) {
-                System.out.println(searchable);
+            TreeMap<String,Product> searchables = searchEngine.search("Яблоко");
+            for (Map.Entry<String, Product> m : searchables.entrySet()) {
+                System.out.println(m.getKey() + ": " + m.getValue());
+            }
+
+            System.out.println("- - - - - - - - - - - - - - - - - ");
+            TreeMap<String,Product> searchables2 = searchEngine.search("Бан");
+            for (Map.Entry<String, Product> m : searchables2.entrySet()) {
+                System.out.println(m.getKey() + ": " + m.getValue());
             }
             System.out.println("- - - - - - - - - - - - - - - - - ");
-            List<Searchable> searchables2 = searchEngine.search("Бан");
-            for (Searchable searchable2 : searchables2) {
-                System.out.println(searchable2);
-            }
-            System.out.println("- - - - - - - - - - - - - - - - - ");
-            List<Searchable> searchables3 = searchEngine.search("емша");
-            for (Searchable searchable3 : searchables3) {
-                System.out.println(searchable3);
+            TreeMap<String,Product> searchables3 = searchEngine.search("емша");
+            for (Map.Entry<String, Product> m : searchables3.entrySet()) {
+                System.out.println(m.getKey() + ": " + m.getValue());
             }
             System.out.println("- - - - - - - - - - - - - - - - - ");
 
@@ -126,13 +126,14 @@ public class App {
             basket.addProduct(product51);
             basket.addProduct(product61);
 //            Удаление существующего продукта из корзины
-            basket.deleteProductByName("Яблоко");
+//            basket.deleteProductByName("Яблоко");
 //            Выведение удаленных продуктов на экран
-            LinkedList<Product> deletedProductsBasket = basket.deleteProductByName("Банан");
-            System.out.println("Удалённые из корзины продукты:");
-            for (Product p : deletedProductsBasket) {
-                System.out.println(p);
+            System.out.println("Выведение удаленных продуктов на экран: ");
+            List<Product> productsToDelete = basket.getProductsToDelete("Яблоко");
+            for (Product product : productsToDelete) {
+                System.out.println(product);
             }
+            basket.deleteProductByName("Яблоко");
             System.out.println("- - - - - - - - - - - - - - - - - ");
 //            Выведение содержимого корзины с помощью метода printBasket
             basket.printBasket();
@@ -140,16 +141,28 @@ public class App {
 //            Удаление несуществующего продукта
 
 //            Проверка списка удаленных продуктов
-            LinkedList<Product> deletedProductsBasket1 = basket.deleteProductByName("Арбуз");
+            for (Product product : productsToDelete) {
+                System.out.println(product);
+            }
+
             System.out.println("Удалённые из корзины продукты:");
-            if (deletedProductsBasket1.isEmpty()) {
+            List<Product> productsToDeleteArbuz = basket.getProductsToDelete("Арбуз");
+            if (productsToDeleteArbuz.isEmpty()) {
                 System.out.println("Список пуст");
             } else {
-                for (Product p : deletedProductsBasket1) {
-                    System.out.println(p);
+                for (Product product : productsToDeleteArbuz) {
+                    System.out.println(product);
                 }
             }
 
+//            if (productsToDelete.isEmpty()) {
+//                System.out.println("Список пуст");
+//            } else {
+//                for (Product product : productsToDelete) {
+//                    System.out.println(product);
+//                }
+//            }
+//            basket.deleteProductByName("Арбуз");
             System.out.println("- - - - - - - - - - - - - - - - - ");
 //            Вывод содержимого корзины на экран
             basket.printBasket();
