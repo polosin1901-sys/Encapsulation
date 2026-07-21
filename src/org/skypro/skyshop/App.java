@@ -62,7 +62,7 @@ public class App {
             System.out.println(discountedProduct.getPrice());
 
 //            Тестирование изменений (домашка к уроку - ООП: полиморфизм, интерфейсы)
-            SearchEngine searchEngine = new SearchEngine(new TreeMap<>());
+            SearchEngine searchEngine = new SearchEngine(new HashSet<>());
             searchEngine.add(product1);
             searchEngine.add(product2);
             searchEngine.add(product3);
@@ -79,20 +79,20 @@ public class App {
             searchEngine.add(article3);
             searchEngine.add(article4);
 
-            TreeMap<String,Searchable> searchables = searchEngine.search("Яблоко");
-            for (Map.Entry<String, Searchable> m : searchables.entrySet()) {
-                System.out.println(m.getKey() + ": " + m.getValue());
+            TreeSet<Searchable> searchables = searchEngine.search("Яблоко");
+            for (Searchable m : searchables) {
+                System.out.println(m.getName());
             }
 
             System.out.println("- - - - - - - - - - - - - - - - - ");
-            TreeMap<String,Searchable> searchables2 = searchEngine.search("Бан");
-            for (Map.Entry<String, Searchable> m : searchables2.entrySet()) {
-                System.out.println(m.getKey() + ": " + m.getValue());
+            TreeSet<Searchable> searchables2 = searchEngine.search("Бан");
+            for (Searchable m : searchables2) {
+                System.out.println(m.getName());
             }
             System.out.println("- - - - - - - - - - - - - - - - - ");
-            TreeMap<String,Searchable> searchables3 = searchEngine.search("емша");
-            for (Map.Entry<String, Searchable> m : searchables3.entrySet()) {
-                System.out.println(m.getKey() + ": " + m.getValue());
+            TreeSet<Searchable> searchables3 = searchEngine.search("емша");
+            for (Searchable m : searchables3) {
+                System.out.println(m.getName());
             }
             System.out.println("- - - - - - - - - - - - - - - - - ");
 
@@ -154,18 +154,27 @@ public class App {
                     System.out.println(product);
                 }
             }
-
-//            if (productsToDelete.isEmpty()) {
-//                System.out.println("Список пуст");
-//            } else {
-//                for (Product product : productsToDelete) {
-//                    System.out.println(product);
-//                }
-//            }
-//            basket.deleteProductByName("Арбуз");
             System.out.println("- - - - - - - - - - - - - - - - - ");
+
 //            Вывод содержимого корзины на экран
             basket.printBasket();
+            System.out.println("- - - - - - - - - - - - - - - - - ");
+//            Проверка работы компаратора
+            System.out.println("Проверка работы компаратора: ");
+            TreeSet<Searchable> resultSet = new TreeSet<>((s1, s2) -> {
+                int lengthCompare = Integer.compare(s2.getName().length(), s1.getName().length());
+                if (lengthCompare != 0) {
+                    return lengthCompare;
+                }
+                return s1.getName().compareTo(s2.getName());
+            });
+resultSet.add(article1);
+resultSet.add(article2);
+resultSet.add(article3);
+resultSet.add(article4);
+            for (Searchable searchable : resultSet) {
+                System.out.println(searchable.getName());
+            }
         }
     }
 }
