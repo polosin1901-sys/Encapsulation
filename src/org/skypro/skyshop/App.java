@@ -79,19 +79,19 @@ public class App {
             searchEngine.add(article3);
             searchEngine.add(article4);
 
-            TreeMap<String,Product> searchables = searchEngine.search("Яблоко");
-            for (Map.Entry<String, Product> m : searchables.entrySet()) {
+            TreeMap<String,Searchable> searchables = searchEngine.search("Яблоко");
+            for (Map.Entry<String, Searchable> m : searchables.entrySet()) {
                 System.out.println(m.getKey() + ": " + m.getValue());
             }
 
             System.out.println("- - - - - - - - - - - - - - - - - ");
-            TreeMap<String,Product> searchables2 = searchEngine.search("Бан");
-            for (Map.Entry<String, Product> m : searchables2.entrySet()) {
+            TreeMap<String,Searchable> searchables2 = searchEngine.search("Бан");
+            for (Map.Entry<String, Searchable> m : searchables2.entrySet()) {
                 System.out.println(m.getKey() + ": " + m.getValue());
             }
             System.out.println("- - - - - - - - - - - - - - - - - ");
-            TreeMap<String,Product> searchables3 = searchEngine.search("емша");
-            for (Map.Entry<String, Product> m : searchables3.entrySet()) {
+            TreeMap<String,Searchable> searchables3 = searchEngine.search("емша");
+            for (Map.Entry<String, Searchable> m : searchables3.entrySet()) {
                 System.out.println(m.getKey() + ": " + m.getValue());
             }
             System.out.println("- - - - - - - - - - - - - - - - - ");
